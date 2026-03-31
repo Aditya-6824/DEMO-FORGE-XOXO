@@ -1,0 +1,109 @@
+﻿
+> demoforge@0.0.0 lint
+> eslint .
+
+
+E:\Pro\demoforge\src\App.tsx
+  18:48  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+E:\Pro\demoforge\src\components\devices\ApiPanel.tsx
+  50:5  error  Error: Calling setState synchronously within an effect can trigger cascading renders
+
+Effects are intended to synchronize state between React and external systems such as manually updating the DOM, state management libraries, or other platform APIs. In general, the body of an effect should do one or both of the following:
+* Update external systems with the latest state from React.
+* Subscribe for updates from some external system, calling setState in a callback function when external state changes.
+
+Calling setState synchronously within an effect body causes cascading renders that can hurt performance, and is not recommended. (https://react.dev/learn/you-might-not-need-an-effect).
+
+E:\Pro\demoforge\src\components\devices\ApiPanel.tsx:50:5
+  48 |
+  49 |   useEffect(() => {
+> 50 |     setAnim('sending')
+     |     ^^^^^^^ Avoid calling setState() directly within an effect
+  51 |     setProgressWidth(0)
+  52 |     const p1 = setTimeout(() => setProgressWidth(40), 50)
+  53 |     const t1 = setTimeout(() => { setAnim('receiving'); setProgressWidth(75) }, 500)  react-hooks/set-state-in-effect
+
+E:\Pro\demoforge\src\lib\mockDb.ts
+   81:45  error  Unexpected any. Specify a different type           @typescript-eslint/no-explicit-any
+   87:24  error  Unexpected any. Specify a different type           @typescript-eslint/no-explicit-any
+   98:26  error  Unexpected any. Specify a different type           @typescript-eslint/no-explicit-any
+   99:40  error  Unexpected any. Specify a different type           @typescript-eslint/no-explicit-any
+  109:10  error  '_cols' is defined but never used                  @typescript-eslint/no-unused-vars
+  118:36  error  Unexpected any. Specify a different type           @typescript-eslint/no-explicit-any
+  118:48  error  Unexpected any. Specify a different type           @typescript-eslint/no-explicit-any
+  122:36  error  Unexpected any. Specify a different type           @typescript-eslint/no-explicit-any
+  168:9   error  'result' is never reassigned. Use 'const' instead  prefer-const
+  172:26  error  Unexpected any. Specify a different type           @typescript-eslint/no-explicit-any
+  172:46  error  Unexpected any. Specify a different type           @typescript-eslint/no-explicit-any
+  183:21  error  Unexpected any. Specify a different type           @typescript-eslint/no-explicit-any
+  183:29  error  Unexpected any. Specify a different type           @typescript-eslint/no-explicit-any
+  183:47  error  Unexpected any. Specify a different type           @typescript-eslint/no-explicit-any
+  183:55  error  Unexpected any. Specify a different type           @typescript-eslint/no-explicit-any
+  188:46  error  Unexpected any. Specify a different type           @typescript-eslint/no-explicit-any
+  191:17  error  Unexpected any. Specify a different type           @typescript-eslint/no-explicit-any
+  194:62  error  Unexpected any. Specify a different type           @typescript-eslint/no-explicit-any
+  200:10  error  '_cols' is defined but never used                  @typescript-eslint/no-unused-vars
+  209:34  error  Unexpected any. Specify a different type           @typescript-eslint/no-explicit-any
+  220:21  error  Unexpected any. Specify a different type           @typescript-eslint/no-explicit-any
+  220:29  error  Unexpected any. Specify a different type           @typescript-eslint/no-explicit-any
+  220:47  error  Unexpected any. Specify a different type           @typescript-eslint/no-explicit-any
+  220:55  error  Unexpected any. Specify a different type           @typescript-eslint/no-explicit-any
+  225:46  error  Unexpected any. Specify a different type           @typescript-eslint/no-explicit-any
+  228:17  error  Unexpected any. Specify a different type           @typescript-eslint/no-explicit-any
+  230:62  error  Unexpected any. Specify a different type           @typescript-eslint/no-explicit-any
+  239:51  error  Unexpected any. Specify a different type           @typescript-eslint/no-explicit-any
+  250:21  error  Unexpected any. Specify a different type           @typescript-eslint/no-explicit-any
+  250:29  error  Unexpected any. Specify a different type           @typescript-eslint/no-explicit-any
+  250:47  error  Unexpected any. Specify a different type           @typescript-eslint/no-explicit-any
+  250:55  error  Unexpected any. Specify a different type           @typescript-eslint/no-explicit-any
+  255:41  error  Unexpected any. Specify a different type           @typescript-eslint/no-explicit-any
+  270:16  error  Unexpected any. Specify a different type           @typescript-eslint/no-explicit-any
+  276:13  error  Unexpected any. Specify a different type           @typescript-eslint/no-explicit-any
+  280:16  error  Unexpected any. Specify a different type           @typescript-eslint/no-explicit-any
+  286:13  error  Unexpected any. Specify a different type           @typescript-eslint/no-explicit-any
+
+E:\Pro\demoforge\src\lib\supabase.ts
+  9:21  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+E:\Pro\demoforge\src\pages\Builder.tsx
+  122:36  error  Unexpected any. Specify a different type  @typescript-eslint/no-explicit-any
+
+E:\Pro\demoforge\src\pages\Dashboard.tsx
+  20:45  error    Unexpected any. Specify a different type                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        @typescript-eslint/no-explicit-any
+  22:7   error    Error: Cannot access variable before it is declared
+
+`loadDemos` is accessed before it is declared, which prevents the earlier access from updating when this value changes over time.
+
+E:\Pro\demoforge\src\pages\Dashboard.tsx:22:7
+  20 |     supabase.auth.getUser().then(({ data }: any) => {
+  21 |       if (!data.user) { navigate('/login'); return }
+> 22 |       loadDemos()
+     |       ^^^^^^^^^ `loadDemos` accessed before it is declared
+  23 |     })
+  24 |   }, [])
+  25 |
+
+E:\Pro\demoforge\src\pages\Dashboard.tsx:26:3
+  24 |   }, [])
+  25 |
+> 26 |   const loadDemos = async () => {
+     |   ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 27 |     const { data } = await supabase
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 28 |       .from('demos').select('*').order('created_at', { ascending: false })
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 29 |     setDemos(data || [])
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 30 |     setLoading(false)
+     | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+> 31 |   }
+     | ^^^^ `loadDemos` is declared here
+  32 |
+  33 |   const createDemo = async () => {
+  34 |     setCreating(true)  react-hooks/immutability
+  24:6   warning  React Hook useEffect has a missing dependency: 'navigate'. Either include it or remove the dependency array                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                     react-hooks/exhaustive-deps
+
+Γ£û 44 problems (43 errors, 1 warning)
+  1 error and 0 warnings potentially fixable with the `--fix` option.
+

@@ -1,0 +1,12 @@
+﻿src/App.tsx(1,50): error TS6133: 'useNavigate' is declared but its value is never read.
+src/App.tsx(18,40): error TS7031: Binding element 'data' implicitly has an 'any' type.
+src/components/devices/IPhoneFrame.tsx(9,58): error TS6133: 'statusText' is declared but its value is never read.
+src/lib/mockDb.ts(92,11): error TS6133: 'selectCalled' is declared but its value is never read.
+src/pages/Builder.tsx(9,1): error TS6133: 'toast' is declared but its value is never read.
+src/pages/Builder.tsx(10,48): error TS6133: 'Save' is declared but its value is never read.
+src/pages/Builder.tsx(10,62): error TS6133: 'Copy' is declared but its value is never read.
+src/pages/Builder.tsx(48,10): error TS6133: 'saving' is declared but its value is never read.
+src/pages/Builder.tsx(48,18): error TS6133: 'setSaving' is declared but its value is never read.
+src/pages/Dashboard.tsx(20,37): error TS7031: Binding element 'data' implicitly has an 'any' type.
+src/pages/Viewer.tsx(127,17): error TS2322: Type '{ method: string; endpoint: string; requestBody: string; responseBody: string; statusCode: number; responseMs: number; stepKey: string; }' is not assignable to type 'IntrinsicAttributes & Props'.
+  Property 'stepKey' does not exist on type 'IntrinsicAttributes & Props'.
